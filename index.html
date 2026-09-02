@@ -192,8 +192,8 @@ nav a:hover::after{ width:100%; }
 }
 .channel-dot{ width:8px; height:8px; border-radius:50%; }
 .channel-photo{
-  width:100%; aspect-ratio:1; object-fit:cover;
-  border-radius:10px; display:block;
+  width:100%; height:auto; display:block;
+  border-radius:10px;
   border:1px solid var(--line);
 }
 .channel-name{ margin-top:14px; font-weight:700; font-size:14px; }
@@ -252,9 +252,9 @@ nav a:hover::after{ width:100%; }
   display:grid; grid-template-columns: 240px 1fr; gap:48px; align-items:center;
 }
 .about-photo{
-  width:100%; aspect-ratio:1;
-  border-radius: var(--radius);
-  background: linear-gradient(150deg, var(--pop-music) 0%, var(--pop-illust) 55%, var(--pop-game) 100%);
+  width:100%; height:auto; display:block;
+  border-radius:50%;
+  border:1px solid var(--line);
   flex-shrink:0;
 }
 .about-name{ font-size: clamp(32px, 6vw, 56px); margin-bottom:20px; }
@@ -321,16 +321,16 @@ nav a:hover::after{ width:100%; }
 .contact-box h2{ color:#faf9f5; margin-bottom:32px; }
 .social-row{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
 .social-pill{
-  display:inline-flex; align-items:center; gap:9px;
+  display:inline-flex; align-items:center; gap:16px;
   border:1px solid rgba(250,249,245,0.3);
-  padding:9px 20px 9px 14px; border-radius:999px; font-size:13px; font-weight:500;
+  padding:14px 30px 14px 14px; border-radius:999px; font-size:17px; font-weight:600;
   transition: background .2s ease, border-color .2s ease;
 }
-.social-pill svg{ width:18px; height:18px; flex-shrink:0; }
+.social-pill svg{ width:24px; height:24px; flex-shrink:0; }
 .social-icon{
-  width:24px; height:24px; flex-shrink:0; object-fit:contain;
-  background:#fff; border-radius:50%; padding:4px; box-sizing:border-box;
-  border:1px solid rgba(0,0,0,0.06);
+  width:48px; height:48px; flex-shrink:0; object-fit:contain;
+  background:#fff; border-radius:12px; padding:8px; box-sizing:border-box;
+  border:1px solid rgba(0,0,0,0.08);
 }
 .social-pill:hover{ background:rgba(250,249,245,0.12); border-color:var(--paper); }
 .social-pill.light{ border-color:var(--line); color:var(--ink); }
@@ -347,7 +347,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
 }
 .back-link:hover{ opacity:1; }
 .detail-title{ font-size:clamp(32px,6vw,56px); margin-bottom:16px; }
-.detail-lead{ opacity:0.65; max-width:560px; font-size:15px; }
+.detail-lead{ max-width:560px; font-size:15px; }
 .detail-thumb{
   margin-top:40px; border-radius: var(--radius); aspect-ratio: 16/9;
   background:
@@ -462,9 +462,14 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
   <section id="about">
     <div class="eyebrow">About</div>
     <div class="about-grid">
-      <img class="about-photo" src="images/profile.png" alt="kmowx プロフィールアイコン" style="object-fit:cover;" width="309" height="309" loading="lazy">
+      <img class="about-photo" src="images/profile.png" alt="kmowx プロフィールアイコン" width="309" height="309" loading="lazy">
       <div>
         <h2 class="display about-name">kmowx</h2>
+        <p class="detail-lead" style="margin-bottom:20px;">
+          2022年後半、音楽・イラストなどの創作活動を開始。<br>
+          主に歌声合成ソフトを使った楽曲、MVイラストを制作。<br>
+          ジャンルにとらわれず、その曲に合った音の組み合わせとビジュアルを探しています。
+        </p>
         <a class="more-link" href="about.html">More →</a>
       </div>
     </div>
@@ -632,51 +637,81 @@ if (navToggle && navList) {
   }));
 }
 
-// ---- 最新動画をYouTubeチャンネルのRSSから取得(rss2json経由) ----
+// ---- 最新動画をYouTubeチャンネルのRSSから取得 ----
 (function () {
   const YT_CHANNEL_ID = 'UCWgE_8t0yW7idh4iB7N9NJg';
   const RSS_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + YT_CHANNEL_ID;
   const API_URL = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL) + '&count=3';
+  // 無料枠が混雑している場合のフォールバック(CORSプロキシ経由でRSSを直接取得)
+  const FALLBACK_URL = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(RSS_URL);
 
   const container = document.getElementById('videoScroll');
   if (!container) return;
 
-  fetch(API_URL)
-    .then(res => res.json())
-    .then(data => {
-      if (data.status !== 'ok' || !data.items || !data.items.length) {
-        container.innerHTML = '<p class="video-loading">動画を取得できませんでした</p>';
-        return;
-      }
-      container.innerHTML = '';
-      data.items.slice(0, 3).forEach(item => {
-        const videoIdMatch = item.link.match(/[?&]v=([^&]+)/);
-        const videoId = videoIdMatch ? videoIdMatch[1] : '';
-        const thumb = item.thumbnail || (videoId ? 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg' : '');
+  function renderItems(items) {
+    container.innerHTML = '';
+    items.slice(0, 3).forEach(({ title, link, thumb }) => {
+      const a = document.createElement('a');
+      a.className = 'video-card';
+      a.href = link;
+      a.target = '_blank';
+      a.rel = 'noopener';
 
-        const a = document.createElement('a');
-        a.className = 'video-card';
-        a.href = item.link;
-        a.target = '_blank';
-        a.rel = 'noopener';
+      const img = document.createElement('img');
+      img.src = thumb;
+      img.alt = title;
+      img.loading = 'lazy';
 
-        const img = document.createElement('img');
-        img.src = thumb;
-        img.alt = item.title;
-        img.loading = 'lazy';
+      const titleEl = document.createElement('div');
+      titleEl.className = 'video-title';
+      titleEl.textContent = title;
 
-        const titleEl = document.createElement('div');
-        titleEl.className = 'video-title';
-        titleEl.textContent = item.title;
-
-        a.appendChild(img);
-        a.appendChild(titleEl);
-        container.appendChild(a);
-      });
-    })
-    .catch(() => {
-      container.innerHTML = '<p class="video-loading">動画を取得できませんでした</p>';
+      a.appendChild(img);
+      a.appendChild(titleEl);
+      container.appendChild(a);
     });
+  }
+
+  function showError() {
+    container.innerHTML = '<p class="video-loading">動画を取得できませんでした</p>';
+  }
+
+  function tryRss2Json() {
+    return fetch(API_URL)
+      .then(res => res.json())
+      .then(data => {
+        if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('rss2json empty');
+        renderItems(data.items.map(item => {
+          const m = item.link.match(/[?&]v=([^&]+)/);
+          const videoId = m ? m[1] : '';
+          return {
+            title: item.title,
+            link: item.link,
+            thumb: item.thumbnail || (videoId ? 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg' : '')
+          };
+        }));
+      });
+  }
+
+  function tryRawFeed() {
+    return fetch(FALLBACK_URL)
+      .then(res => res.text())
+      .then(xmlText => {
+        const doc = new DOMParser().parseFromString(xmlText, 'text/xml');
+        const entries = Array.from(doc.getElementsByTagName('entry'));
+        if (!entries.length) throw new Error('feed empty');
+        const items = entries.map(entry => {
+          const title = entry.getElementsByTagName('title')[0]?.textContent || '';
+          const link = entry.getElementsByTagName('link')[0]?.getAttribute('href') || '';
+          const thumbEl = entry.getElementsByTagName('media:thumbnail')[0];
+          const thumb = thumbEl ? thumbEl.getAttribute('url') : '';
+          return { title, link, thumb };
+        });
+        renderItems(items);
+      });
+  }
+
+  tryRss2Json().catch(() => tryRawFeed().catch(showError));
 })();
 
 </script>

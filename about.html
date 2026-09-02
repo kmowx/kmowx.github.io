@@ -230,9 +230,9 @@ nav a:hover::after{ width:100%; }
   display:grid; grid-template-columns: 240px 1fr; gap:48px; align-items:center;
 }
 .about-photo{
-  width:100%; aspect-ratio:1;
-  border-radius: var(--radius);
-  background: linear-gradient(150deg, var(--pop-music) 0%, var(--pop-illust) 55%, var(--pop-game) 100%);
+  width:100%; height:auto; display:block;
+  border-radius:50%;
+  border:1px solid var(--line);
   flex-shrink:0;
 }
 .about-name{ font-size: clamp(32px, 6vw, 56px); margin-bottom:20px; }
@@ -318,7 +318,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
 }
 .back-link:hover{ opacity:1; }
 .detail-title{ font-size:clamp(32px,6vw,56px); margin-bottom:16px; }
-.detail-lead{ opacity:0.65; max-width:560px; font-size:15px; }
+.detail-lead{ max-width:560px; font-size:15px; }
 .detail-thumb{
   margin-top:40px; border-radius: var(--radius); aspect-ratio: 16/9;
   background:
@@ -391,7 +391,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
 
   <section class="detail-content">
     <div class="about-grid" style="align-items:flex-start; grid-template-columns:200px 1fr;">
-      <img class="about-photo" src="images/profile.png" alt="kmowx プロフィールアイコン" style="object-fit:cover;" width="309" height="309" loading="lazy">
+      <img class="about-photo" src="images/profile.png" alt="kmowx プロフィールアイコン" width="309" height="309" loading="lazy">
       <p class="detail-lead" style="max-width:560px;">
         2022年後半、音楽・イラストなどの創作活動を開始。<br>
         主に歌声合成ソフトを使った楽曲、MVイラストを制作。<br>
