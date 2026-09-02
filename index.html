@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<script>
+(function(){try{var t=localStorage.getItem('kmowx-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/png" href="images/profile.png">
+<link rel="apple-touch-icon" href="images/profile.png">
+<meta name="description" content="ボカロP・イラストレーター kmowx の作品ポータル。オリジナル楽曲、MVイラスト、自作リズムゲームをまとめて紹介しています。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="kmowxのホームページ">
+<meta property="og:description" content="ボカロP・イラストレーター kmowx の作品ポータル。オリジナル楽曲、MVイラスト、自作リズムゲームをまとめて紹介しています。">
+<meta property="og:url" content="https://kmowx.github.io/">
+<meta property="og:image" content="https://kmowx.github.io/images/profile.png">
+<meta property="og:site_name" content="kmowxのホームページ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kmowxのホームページ">
+<meta name="twitter:description" content="ボカロP・イラストレーター kmowx の作品ポータル。オリジナル楽曲、MVイラスト、自作リズムゲームをまとめて紹介しています。">
+<meta name="twitter:image" content="https://kmowx.github.io/images/profile.png">
+<title>kmowxのホームページ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16161d;
+  --paper:#faf9f5;
+  --paper-dim:#f0efe9;
+  --pop-music:#ff4d8d;
+  --pop-illust:#ffd23f;
+  --pop-game:#3fd9ff;
+  --line: rgba(22,22,29,0.12);
+  --radius: 14px;
+  --paper-rgb: 250, 249, 245;
+  --surface: #ffffff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#f2f1ec;
+    --paper:#151519;
+    --paper-dim:#1f1f26;
+    --line: rgba(255,255,255,0.14);
+    --paper-rgb: 21, 21, 25;
+    --surface: #1c1c23;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#f2f1ec;
+  --paper:#151519;
+  --paper-dim:#1f1f26;
+  --line: rgba(255,255,255,0.14);
+  --paper-rgb: 21, 21, 25;
+  --surface: #1c1c23;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth; background:var(--paper); transition: background-color .2s ease;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Noto Sans JP', sans-serif;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  transition: background-color .2s ease, color .2s ease;
+}
+.display{ font-family:'Zen Kaku Gothic New', sans-serif; font-weight:900; letter-spacing:0.01em; }
+.mono{ font-family:'Space Grotesk', monospace; letter-spacing:0.02em; }
+
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
+section{ padding: 96px 24px; max-width:1080px; margin:0 auto; }
+.eyebrow{
+  font-family:'Space Grotesk', monospace;
+  font-size:13px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  opacity:0.55;
+  margin-bottom:14px;
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow::before{ content:""; width:22px; height:2px; background:currentColor; opacity:0.5; }
+
+/* ---------- NAV ---------- */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 18px 28px;
+  backdrop-filter: blur(10px);
+  background: rgba(var(--paper-rgb), 0.72);
+  border-bottom:1px solid var(--line);
+}
+.logo{
+  display:flex; align-items:center; gap:12px;
+  font-family:'Zen Kaku Gothic New', sans-serif;
+  font-weight:900; letter-spacing:0.01em; font-size:22px;
+}
+.logo-mark{
+  width:40px; height:40px; border-radius:50%;
+  object-fit:cover;
+  border:1px solid var(--line);
+}
+nav ul{ display:flex; gap:28px; list-style:none; }
+nav a{
+  font-size:14px; font-weight:500; opacity:0.7;
+  position:relative; padding:4px 0;
+  transition: opacity .2s ease;
+}
+nav a:hover{ opacity:1; }
+nav a::after{
+  content:""; position:absolute; left:0; bottom:-2px;
+  width:0; height:2px; background:var(--ink);
+  transition: width .25s ease;
+}
+nav a:hover::after{ width:100%; }
+.header-right{ display:flex; align-items:center; gap:14px; }
+.theme-toggle{
+  background:none; border:1px solid var(--line); border-radius:50%;
+  width:36px; height:36px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:15px; color:var(--ink);
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.theme-toggle:hover{ background:var(--paper-dim); }
+.nav-toggle{ display:none; }
+
+/* ---------- HERO (index) ---------- */
+.hero{
+  min-height:92svh;
+  display:flex; flex-direction:column; justify-content:center;
+  padding-top:140px;
+  max-width:1080px;
+}
+.hero h1{
+  font-size:clamp(34px, 6vw, 64px);
+  line-height:1.15;
+  margin-bottom:16px;
+}
+.hero-jp{
+  font-family:'Zen Kaku Gothic New', sans-serif;
+  font-weight:700;
+  font-size:clamp(15px, 2vw, 18px);
+  opacity:0.6;
+  margin-bottom:10px;
+}
+.hero-subtitle{
+  font-size:clamp(16px, 2.4vw, 22px);
+  font-weight:500;
+  margin-bottom:48px;
+}
+.hero-subtitle .accent-music{ color:var(--pop-music); }
+.hero-subtitle .accent-illust{ color:#c99a00; }
+.hero-subtitle .accent-game{ color:#0090ab; }
+.hero .tagline{
+  font-family:'Space Grotesk', monospace;
+  font-size:13px; letter-spacing:0.18em; text-transform:uppercase; opacity:0.55;
+  margin-bottom:16px;
+}
+
+/* mixer / channel strips — signature element */
+.mixer{
+  display:flex; gap:14px; align-items:flex-end;
+  margin-top:8px;
+}
+.channel{
+  flex:1; max-width:180px;
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(var(--paper-rgb), 0.55);
+  padding:16px 14px 20px;
+  cursor:pointer;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background-color .2s ease;
+}
+.channel:hover, .channel:focus-visible{
+  transform: translateY(-6px);
+  border-color: var(--ink);
+  box-shadow: 0 14px 28px -18px rgba(22,22,29,0.35);
+  outline: none;
+}
+.channel:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+.channel-label{
+  font-family:'Space Grotesk', monospace;
+  font-size:12px; letter-spacing:0.1em;
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:14px; opacity:0.8;
+}
+.channel-dot{ width:8px; height:8px; border-radius:50%; }
+.channel-photo{
+  width:100%; aspect-ratio:1; object-fit:cover;
+  border-radius:10px; display:block;
+  border:1px solid var(--line);
+}
+.channel-name{ margin-top:14px; font-weight:700; font-size:14px; }
+.channel-sub{ font-size:12px; opacity:0.55; margin-top:2px; }
+
+.scroll-hint{
+  margin-top:64px; font-size:12px; opacity:0.5;
+  font-family:'Space Grotesk', monospace;
+  display:flex; align-items:center; gap:8px;
+}
+.scroll-hint .line{ width:32px; height:1px; background:currentColor; animation: scrollline 2s ease-in-out infinite; }
+@keyframes scrollline{ 0%,100%{ transform:scaleX(1); opacity:.5; } 50%{ transform:scaleX(1.6); opacity:1; } }
+
+/* ---------- SECTION HEAD ---------- */
+.section-head{
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-bottom:44px; flex-wrap:wrap; gap:16px;
+}
+.section-head h2{ font-size: clamp(28px, 4vw, 40px); margin-bottom:0; }
+.more-link{
+  font-family:'Space Grotesk', monospace;
+  font-size:13px; font-weight:600; letter-spacing:0.04em;
+  display:inline-flex; align-items:center; gap:6px;
+  border-bottom:1px solid var(--ink);
+  padding-bottom:2px;
+  transition: opacity .2s ease, gap .2s ease;
+}
+.more-link:hover{ opacity:0.6; gap:10px; }
+
+/* ---------- LATEST VIDEOS ---------- */
+.video-scroll{
+  display:flex; gap:20px; overflow-x:auto; padding-bottom:14px;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+}
+.video-scroll::-webkit-scrollbar{ height:6px; }
+.video-scroll::-webkit-scrollbar-thumb{ background:var(--line); border-radius:999px; }
+.video-card{
+  flex:0 0 280px; scroll-snap-align:start;
+  text-decoration:none; color:inherit;
+}
+.video-card img{
+  width:100%; aspect-ratio:16/9; object-fit:cover;
+  border-radius:var(--radius); border:1px solid var(--line);
+  background:var(--paper-dim);
+  transition: transform .25s ease;
+}
+.video-card:hover img{ transform:translateY(-4px); }
+.video-title{
+  margin-top:10px; font-size:13px; font-weight:600; line-height:1.5;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.video-loading{ font-family:'Space Grotesk',monospace; font-size:13px; opacity:.5; }
+
+/* ---------- ABOUT ---------- */
+.about-grid{
+  display:grid; grid-template-columns: 240px 1fr; gap:48px; align-items:center;
+}
+.about-photo{
+  width:100%; aspect-ratio:1;
+  border-radius: var(--radius);
+  background: linear-gradient(150deg, var(--pop-music) 0%, var(--pop-illust) 55%, var(--pop-game) 100%);
+  flex-shrink:0;
+}
+.about-name{ font-size: clamp(32px, 6vw, 56px); margin-bottom:20px; }
+
+/* ---------- CARD GRID ---------- */
+.card-grid{ display:grid; gap:20px; grid-template-columns: repeat(3, 1fr); }
+.card{
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  overflow:hidden;
+  background:var(--surface);
+  transition: transform .25s ease, box-shadow .25s ease, background-color .2s ease;
+}
+.card:hover{ transform: translateY(-5px); box-shadow: 0 16px 30px -20px rgba(22,22,29,0.4); }
+.card-art{
+  aspect-ratio: 4/3;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Space Grotesk', monospace; font-size:12px;
+  color:rgba(255,255,255,0.85);
+}
+.card-body{ padding:16px 18px 20px; }
+.card-tag{
+  font-family:'Space Grotesk', monospace; font-size:11px;
+  letter-spacing:0.08em; opacity:0.55; margin-bottom:6px; text-transform:uppercase;
+}
+.card-title{ font-weight:700; font-size:15px; }
+
+.waveform{ display:flex; align-items:flex-end; gap:3px; height:40px; }
+.waveform span{ width:4px; background:rgba(255,255,255,0.85); border-radius:2px; animation: bar 1.6s ease-in-out infinite; }
+@keyframes bar{ 0%,100%{ transform:scaleY(0.4);} 50%{ transform:scaleY(1);} }
+
+/* ---------- GAME feature (index, compact) ---------- */
+.feature{
+  display:grid; grid-template-columns: 1fr 1fr; gap:48px; align-items:center;
+  border:1px solid var(--line); border-radius: var(--radius);
+  padding:40px; background:var(--surface);
+}
+.feature-visual{
+  aspect-ratio: 4/3; border-radius: 10px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,77,141,0.18), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgba(63,217,255,0.22), transparent 55%),
+    var(--ink);
+  position:relative; overflow:hidden;
+}
+.target{ position:absolute; width:34px; height:34px; border-radius:50%; border:2px solid var(--pop-game); }
+.target::after{ content:""; position:absolute; inset:8px; border-radius:50%; background:var(--pop-game); }
+.target.red{ border-color:var(--pop-music); }
+.target.red::after{ background:var(--pop-music); }
+.t1{ top:20%; left:15%; animation: drift 5s ease-in-out infinite; }
+.t2{ top:55%; left:60%; animation: drift 4.2s ease-in-out infinite reverse; }
+.t3{ top:70%; left:20%; animation: drift 6s ease-in-out infinite; }
+@keyframes drift{ 0%,100%{ transform:translate(0,0);} 50%{ transform:translate(12px,-10px);} }
+.feature-title{ font-size:20px; font-weight:700; margin-bottom:10px; }
+.feature-desc{ opacity:.7; font-size:14px; margin-bottom:20px; }
+
+/* ---------- CONTACT ---------- */
+#contact{ padding-bottom:140px; }
+.contact-box{
+  border-radius: var(--radius);
+  background:#16161d; color:#faf9f5;
+  padding:64px 48px; text-align:center;
+}
+.contact-box h2{ color:#faf9f5; margin-bottom:32px; }
+.social-row{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+.social-pill{
+  display:inline-flex; align-items:center; gap:9px;
+  border:1px solid rgba(250,249,245,0.3);
+  padding:9px 20px 9px 14px; border-radius:999px; font-size:13px; font-weight:500;
+  transition: background .2s ease, border-color .2s ease;
+}
+.social-pill svg{ width:18px; height:18px; flex-shrink:0; }
+.social-icon{
+  width:24px; height:24px; flex-shrink:0; object-fit:contain;
+  background:#fff; border-radius:50%; padding:4px; box-sizing:border-box;
+  border:1px solid rgba(0,0,0,0.06);
+}
+.social-pill:hover{ background:rgba(250,249,245,0.12); border-color:var(--paper); }
+.social-pill.light{ border-color:var(--line); color:var(--ink); }
+.social-pill.light:hover{ background:var(--paper-dim); border-color:var(--ink); }
+
+footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-family:'Space Grotesk',monospace; }
+
+/* ---------- DETAIL PAGES ---------- */
+.detail-hero{ padding-top:160px; max-width:1080px; }
+.back-link{
+  font-family:'Space Grotesk', monospace; font-size:13px; opacity:0.55;
+  display:inline-flex; align-items:center; gap:6px; margin-bottom:24px;
+  transition: opacity .2s ease;
+}
+.back-link:hover{ opacity:1; }
+.detail-title{ font-size:clamp(32px,6vw,56px); margin-bottom:16px; }
+.detail-lead{ opacity:0.65; max-width:560px; font-size:15px; }
+.detail-thumb{
+  margin-top:40px; border-radius: var(--radius); aspect-ratio: 16/9;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,77,141,0.18), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgba(63,217,255,0.22), transparent 55%),
+    var(--ink);
+  position:relative; overflow:hidden;
+}
+.detail-content{ padding-top:0; }
+.detail-list{ list-style:none; margin-top:24px; max-width:520px; }
+.detail-list li{ padding:12px 0; border-top:1px solid var(--line); font-size:14px; display:flex; gap:12px; }
+.detail-list li:last-child{ border-bottom:1px solid var(--line); }
+.detail-list b{ font-family:'Space Grotesk',monospace; opacity:0.5; font-weight:600; min-width:64px; }
+.empty-note{
+  margin-top:16px; font-size:13px; opacity:0.4;
+  border:1px dashed var(--line); border-radius:10px; padding:24px; max-width:520px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px){
+  .card-grid{ grid-template-columns: 1fr 1fr; }
+  .feature{ grid-template-columns: 1fr; padding:26px; }
+}
+@media (max-width: 620px){
+  nav ul{
+    position:fixed; top:64px; left:0; right:0;
+    flex-direction:column; gap:0;
+    background:var(--paper); border-bottom:1px solid var(--line);
+    max-height:0; overflow:hidden; transition: max-height .3s ease;
+  }
+  nav ul.open{ max-height:280px; }
+  nav li{ border-top:1px solid var(--line); }
+  nav a{ display:block; padding:16px 24px; }
+  .nav-toggle{ display:block; background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink); }
+  .mixer{ flex-wrap:wrap; }
+  .channel{ max-width:none; flex:1 1 30%; }
+  .card-grid{ grid-template-columns: 1fr; }
+  section{ padding:72px 20px; }
+  .contact-box{ padding:44px 24px; }
+  .about-grid{ grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <img class="logo-mark" src="images/profile.png" alt="" aria-hidden="true" width="309" height="309">
+    kmowx
+  </a>
+  <div class="header-right">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="ダークモード切り替え">🌙</button>
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">☰</button>
+    <nav>
+      <ul id="navList">
+        <li><a href="#about">About</a></li>
+        <li><a href="#music">Music</a></li>
+        <li><a href="#illust">Illust</a></li>
+        <li><a href="#game">Game</a></li>
+        <li><a href="#links">Links</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <h1 class="display">Welcome to Kmowx's Park.</h1>
+    <p class="hero-jp">モーズパークへようこそ</p>
+    <p class="hero-subtitle">
+      A place where <span class="accent-music">sound</span>, <span class="accent-illust">art</span>, and <span class="accent-game">play</span> merge.
+    </p>
+
+    <div class="mixer" role="group" aria-label="制作分野へのショートカット">
+      <a class="channel" data-c="music" href="#music" aria-label="Musicセクションへ">
+        <div class="channel-label"><span>CH.1</span><span class="channel-dot" style="background:var(--pop-music)"></span></div>
+        <img class="channel-photo" src="images/char-music.jpg" alt="Musicキャラクター" width="520" height="520" loading="lazy">
+        <div class="channel-name">Music</div>
+      </a>
+      <a class="channel" data-c="illust" href="#illust" aria-label="Illustセクションへ">
+        <div class="channel-label"><span>CH.2</span><span class="channel-dot" style="background:var(--pop-illust)"></span></div>
+        <img class="channel-photo" src="images/char-illust.jpg" alt="Illustキャラクター" width="520" height="520" loading="lazy">
+        <div class="channel-name">Illust</div>
+      </a>
+      <a class="channel" data-c="game" href="#game" aria-label="Gameセクションへ">
+        <div class="channel-label"><span>CH.3</span><span class="channel-dot" style="background:var(--pop-game)"></span></div>
+        <img class="channel-photo" src="images/char-game.jpg" alt="Gameキャラクター" width="520" height="520" loading="lazy">
+        <div class="channel-name">Game</div>
+      </a>
+    </div>
+
+    <div class="scroll-hint"><span class="line"></span>SCROLL</div>
+  </section>
+
+  <!-- ================= LATEST VIDEOS ================= -->
+  <section id="latest-videos">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Latest Videos</div>
+        <h2 class="display">最新動画</h2>
+      </div>
+    </div>
+    <div class="video-scroll" id="videoScroll">
+      <p class="video-loading">読み込み中…</p>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about">
+    <div class="eyebrow">About</div>
+    <div class="about-grid">
+      <img class="about-photo" src="images/profile.png" alt="kmowx プロフィールアイコン" style="object-fit:cover;" width="309" height="309" loading="lazy">
+      <div>
+        <h2 class="display about-name">kmowx</h2>
+        <a class="more-link" href="about.html">More →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MUSIC ================= -->
+  <section id="music">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">CH.1 — Music</div>
+        <h2 class="display">Music</h2>
+      </div>
+      <a class="more-link" href="music.html">More →</a>
+    </div>
+    <div class="card-grid">
+      <a class="card" href="https://youtu.be/m-apH_VTGUg" target="_blank" rel="noopener">
+        <div class="card-art"><img src="images/music-1.jpg" alt="モスキート / 重音テトSV" width="700" height="394" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="card-body">
+          <div class="card-tag">Original Song</div>
+          <div class="card-title">モスキート / 重音テトSV</div>
+          <div class="more-link" style="margin-top:10px;">YouTubeで視聴 →</div>
+        </div>
+      </a>
+      <a class="card" href="https://youtu.be/wuTTN7iIcHc" target="_blank" rel="noopener">
+        <div class="card-art"><img src="images/music-2.jpg" alt="君の心臓にキスしたい / 重音テトSV" width="700" height="394" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="card-body">
+          <div class="card-tag">Original Song</div>
+          <div class="card-title">君の心臓にキスしたい / 重音テトSV</div>
+          <div class="more-link" style="margin-top:10px;">YouTubeで視聴 →</div>
+        </div>
+      </a>
+      <a class="card" href="https://youtu.be/f54H7pDMADw" target="_blank" rel="noopener">
+        <div class="card-art"><img src="images/music-3.jpg" alt="朝だよマスター！ / 重音テトSV" width="700" height="394" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="card-body">
+          <div class="card-tag">Original Song</div>
+          <div class="card-title">朝だよマスター！ / 重音テトSV</div>
+          <div class="more-link" style="margin-top:10px;">YouTubeで視聴 →</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= ILLUST ================= -->
+  <section id="illust">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">CH.2 — Illust</div>
+        <h2 class="display">Illust</h2>
+      </div>
+      <a class="more-link" href="illust.html">More →</a>
+    </div>
+    <div class="card-grid">
+      <a class="card" href="https://www.pixiv.net/artworks/139188734" target="_blank" rel="noopener">
+        <div class="card-art"><img src="images/illust-1.jpg" alt="重音テト3連発！" width="700" height="637" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="card-body">
+          <div class="card-tag">Illustration</div>
+          <div class="card-title">重音テト3連発！</div>
+          <div class="more-link" style="margin-top:10px;">pixivで見る →</div>
+        </div>
+      </a>
+      <a class="card" href="https://www.pixiv.net/artworks/146742986" target="_blank" rel="noopener">
+        <div class="card-art"><img src="images/illust-2.jpg" alt="Fall asleep with 重音テト" width="633" height="700" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="card-body">
+          <div class="card-tag">Illustration</div>
+          <div class="card-title">Fall asleep with 重音テト</div>
+          <div class="more-link" style="margin-top:10px;">pixivで見る →</div>
+        </div>
+      </a>
+      <a class="card" href="https://www.pixiv.net/artworks/143798957" target="_blank" rel="noopener">
+        <div class="card-art"><img src="images/illust-3.jpg" alt="重音テトとディナー" width="624" height="700" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="card-body">
+          <div class="card-tag">Illustration</div>
+          <div class="card-title">重音テトとディナー</div>
+          <div class="more-link" style="margin-top:10px;">pixivで見る →</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= GAME ================= -->
+  <section id="game">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">CH.3 — Game</div>
+        <h2 class="display">Game</h2>
+      </div>
+      <a class="more-link" href="game.html">More →</a>
+    </div>
+    <div class="feature">
+      <div class="feature-visual">
+        <img src="images/game-1.jpg" alt="kmowxのリズムゲーム プレイ画面" style="width:100%; height:100%; object-fit:cover;" width="1000" height="483" loading="lazy">
+      </div>
+      <div>
+        <div class="feature-title">kmowxのリズムゲーム</div>
+        <p class="feature-desc">kmowxの曲に合わせてターゲットを狙い撃つ、一人称視点のリズムアクション。</p>
+        <a class="more-link" href="game.html">More →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="links">
+    <div class="contact-box">
+      <div class="eyebrow" style="justify-content:center; opacity:.6;">Links</div>
+      <h2 class="display">Links</h2>
+      <div class="social-row">
+        <a class="social-pill" href="https://www.youtube.com/@kmowx2660" target="_blank" rel="noopener"><img class="social-icon" src="images/icon-youtube.png" alt="YouTube" width="160" height="137" loading="lazy">YouTube</a>
+        <a class="social-pill" href="https://www.nicovideo.jp/user/123716442" target="_blank" rel="noopener"><img class="social-icon" src="images/icon-niconico.png" alt="niconico" width="160" height="160" loading="lazy">niconico</a>
+        <a class="social-pill" href="https://x.com/kmowxkmowx" target="_blank" rel="noopener"><img class="social-icon" src="images/icon-x.png" alt="X" width="157" height="160" loading="lazy">X</a>
+        <a class="social-pill" href="https://www.pixiv.net/users/122501995" target="_blank" rel="noopener"><img class="social-icon" src="images/icon-pixiv.png" alt="pixiv" width="160" height="160" loading="lazy">pixiv</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 kmowx</footer>
+
+<script>
+// ---- ダークモード切り替え ----
+(function () {
+  var THEME_KEY = 'kmowx-theme';
+  var toggleBtn = document.getElementById('themeToggle');
+  var mql = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function effectiveTheme() {
+    var forced = document.documentElement.getAttribute('data-theme');
+    if (forced === 'light' || forced === 'dark') return forced;
+    return mql.matches ? 'dark' : 'light';
+  }
+
+  function updateIcon() {
+    if (!toggleBtn) return;
+    var eff = effectiveTheme();
+    toggleBtn.textContent = eff === 'dark' ? '\u2600\ufe0f' : '\ud83c\udf19';
+    toggleBtn.setAttribute('aria-label', eff === 'dark' ? 'ライトモードに切り替え' : 'ダークモードに切り替え');
+  }
+
+  updateIcon();
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', function () {
+      var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+      updateIcon();
+    });
+  }
+
+  mql.addEventListener('change', function () {
+    if (!document.documentElement.getAttribute('data-theme')) updateIcon();
+  });
+})();
+
+const navToggle = document.getElementById('navToggle');
+const navList = document.getElementById('navList');
+if (navToggle && navList) {
+  navToggle.addEventListener('click', () => {
+    const open = navList.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navList.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+}
+
+// ---- 最新動画をYouTubeチャンネルのRSSから取得(rss2json経由) ----
+(function () {
+  const YT_CHANNEL_ID = 'UCWgE_8t0yW7idh4iB7N9NJg';
+  const RSS_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + YT_CHANNEL_ID;
+  const API_URL = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(RSS_URL) + '&count=3';
+
+  const container = document.getElementById('videoScroll');
+  if (!container) return;
+
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      if (data.status !== 'ok' || !data.items || !data.items.length) {
+        container.innerHTML = '<p class="video-loading">動画を取得できませんでした</p>';
+        return;
+      }
+      container.innerHTML = '';
+      data.items.slice(0, 3).forEach(item => {
+        const videoIdMatch = item.link.match(/[?&]v=([^&]+)/);
+        const videoId = videoIdMatch ? videoIdMatch[1] : '';
+        const thumb = item.thumbnail || (videoId ? 'https://i.ytimg.com/vi/' + videoId + '/hqdefault.jpg' : '');
+
+        const a = document.createElement('a');
+        a.className = 'video-card';
+        a.href = item.link;
+        a.target = '_blank';
+        a.rel = 'noopener';
+
+        const img = document.createElement('img');
+        img.src = thumb;
+        img.alt = item.title;
+        img.loading = 'lazy';
+
+        const titleEl = document.createElement('div');
+        titleEl.className = 'video-title';
+        titleEl.textContent = item.title;
+
+        a.appendChild(img);
+        a.appendChild(titleEl);
+        container.appendChild(a);
+      });
+    })
+    .catch(() => {
+      container.innerHTML = '<p class="video-loading">動画を取得できませんでした</p>';
+    });
+})();
+
+</script>
+</body>
+</html>
