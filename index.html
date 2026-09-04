@@ -223,6 +223,19 @@ nav a:hover::after{ width:100%; }
 }
 .more-link:hover{ opacity:0.6; gap:10px; }
 
+/* ---------- NEWS ---------- */
+.news-list{ list-style:none; margin-top:8px; }
+.news-list li{
+  display:flex; gap:24px; align-items:baseline;
+  padding:14px 0; border-top:1px solid var(--line);
+  font-size:14px;
+}
+.news-list li:last-child{ border-bottom:1px solid var(--line); }
+.news-date{
+  font-family:'Space Grotesk', monospace; font-size:13px;
+  opacity:0.5; flex-shrink:0; min-width:96px;
+}
+
 /* ---------- ABOUT ---------- */
 .about-grid{
   display:grid; grid-template-columns: 240px 1fr; gap:48px; align-items:center;
@@ -380,6 +393,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
     <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">☰</button>
     <nav>
       <ul id="navList">
+        <li><a href="#news">News</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#music">Music</a></li>
         <li><a href="#illust">Illust</a></li>
@@ -421,7 +435,20 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
     <div class="scroll-hint"><span class="line"></span>SCROLL</div>
   </section>
 
-  <!-- ================= LATEST VIDEOS ================= -->
+  <!-- ================= NEWS ================= -->
+  <section id="news">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">News</div>
+        <h2 class="display">News</h2>
+      </div>
+      <a class="more-link" href="news.html">More →</a>
+    </div>
+    <ul class="news-list">
+      <li><span class="news-date">2026.09.04</span><span class="news-text">kmowxのホームページ「Kmowx's Park」運用開始</span></li>
+    </ul>
+  </section>
+
   <!-- ================= ABOUT ================= -->
   <section id="about">
     <div class="eyebrow">About</div>
@@ -432,7 +459,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
         <p class="detail-lead" style="margin-bottom:20px;">
           2022年後半、音楽・イラストなどの創作活動を開始。<br>
           主に歌声合成ソフトを使った楽曲、MVイラストを制作。<br>
-          ジャンルにとらわれず、その曲に合った音の組み合わせとビジュアルを探しています。
+          自分が面白いと思えるアイデアを探しながら、少しずつ形にしています。
         </p>
         <a class="more-link" href="about.html">More →</a>
       </div>
@@ -600,6 +627,18 @@ if (navToggle && navList) {
     navToggle.setAttribute('aria-expanded', 'false');
   }));
 }
+
+// ---- ページ内ジャンプで履歴を積み増さないようにする ----
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth' });
+    history.replaceState(null, '', '#' + id);
+  });
+});
 
 </script>
 </body>

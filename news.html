@@ -9,18 +9,18 @@
 <meta name="color-scheme" content="light dark">
 <link rel="icon" type="image/png" href="images/profile.png">
 <link rel="apple-touch-icon" href="images/profile.png">
-<meta name="description" content="kmowxが制作したイラスト作品の一覧。楽曲のMVイラストなどを紹介。">
+<meta name="description" content="kmowxのホームページ・ゲームに関するお知らせ一覧。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Illust | kmowxのホームページ">
-<meta property="og:description" content="kmowxが制作したイラスト作品の一覧。楽曲のMVイラストなどを紹介。">
-<meta property="og:url" content="https://kmowx.github.io/illust.html">
+<meta property="og:title" content="News | kmowxのホームページ">
+<meta property="og:description" content="kmowxのホームページ・ゲームに関するお知らせ一覧。">
+<meta property="og:url" content="https://kmowx.github.io/news.html">
 <meta property="og:image" content="https://kmowx.github.io/images/profile.png">
 <meta property="og:site_name" content="kmowxのホームページ">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Illust | kmowxのホームページ">
-<meta name="twitter:description" content="kmowxが制作したイラスト作品の一覧。楽曲のMVイラストなどを紹介。">
+<meta name="twitter:title" content="News | kmowxのホームページ">
+<meta name="twitter:description" content="kmowxのホームページ・ゲームに関するお知らせ一覧。">
 <meta name="twitter:image" content="https://kmowx.github.io/images/profile.png">
-<title>Illust | kmowxのホームページ</title>
+<title>News | kmowxのホームページ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -230,9 +230,9 @@ nav a:hover::after{ width:100%; }
   display:grid; grid-template-columns: 240px 1fr; gap:48px; align-items:center;
 }
 .about-photo{
-  width:100%; aspect-ratio:1;
-  border-radius: var(--radius);
-  background: linear-gradient(150deg, var(--pop-music) 0%, var(--pop-illust) 55%, var(--pop-game) 100%);
+  width:100%; height:auto; display:block;
+  border-radius:50%;
+  border:1px solid var(--line);
   flex-shrink:0;
 }
 .about-name{ font-size: clamp(32px, 6vw, 56px); margin-bottom:20px; }
@@ -318,7 +318,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
 }
 .back-link:hover{ opacity:1; }
 .detail-title{ font-size:clamp(32px,6vw,56px); margin-bottom:16px; }
-.detail-lead{ opacity:0.65; max-width:560px; font-size:15px; }
+.detail-lead{ max-width:560px; font-size:15px; }
 .detail-thumb{
   margin-top:40px; border-radius: var(--radius); aspect-ratio: 16/9;
   background:
@@ -361,6 +361,19 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
   .about-grid{ grid-template-columns: 1fr; }
 }
 
+
+/* ---------- NEWS ---------- */
+.news-list{ list-style:none; margin-top:8px; max-width:640px; }
+.news-list li{
+  display:flex; gap:24px; align-items:baseline;
+  padding:14px 0; border-top:1px solid var(--line);
+  font-size:14px;
+}
+.news-list li:last-child{ border-bottom:1px solid var(--line); }
+.news-date{
+  font-family:'Space Grotesk', monospace; font-size:13px;
+  opacity:0.5; flex-shrink:0; min-width:96px;
+}
 </style>
 </head>
 <body>
@@ -386,90 +399,21 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
 <main>
   <section class="detail-hero">
     <a class="back-link" href="index.html">← Home</a>
-    <div class="eyebrow">CH.2 — Illust</div>
-    <h1 class="display detail-title">Illust</h1>
+    <div class="eyebrow">News</div>
+    <h1 class="display detail-title">News</h1>
   </section>
 
   <section class="detail-content">
-    <div class="card-grid">
-      <a class="card" href="https://www.pixiv.net/artworks/139188734" target="_blank" rel="noopener">
-        <div class="card-art"><img src="images/illust-1.jpg" alt="重音テト3連発！" width="700" height="637" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="card-body">
-          <div class="card-tag">Illustration</div>
-          <div class="card-title">重音テト3連発！</div>
-          <div class="more-link" style="margin-top:10px;">pixivで見る →</div>
-        </div>
-      </a>
-      <a class="card" href="https://www.pixiv.net/artworks/146742986" target="_blank" rel="noopener">
-        <div class="card-art"><img src="images/illust-2.jpg" alt="Fall asleep with 重音テト" width="633" height="700" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="card-body">
-          <div class="card-tag">Illustration</div>
-          <div class="card-title">Fall asleep with 重音テト</div>
-          <div class="more-link" style="margin-top:10px;">pixivで見る →</div>
-        </div>
-      </a>
-      <a class="card" href="https://www.pixiv.net/artworks/143798957" target="_blank" rel="noopener">
-        <div class="card-art"><img src="images/illust-3.jpg" alt="重音テトとディナー" width="624" height="700" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="card-body">
-          <div class="card-tag">Illustration</div>
-          <div class="card-title">重音テトとディナー</div>
-          <div class="more-link" style="margin-top:10px;">pixivで見る →</div>
-        </div>
-      </a>
-    </div>
+    <ul class="news-list">
+      <li><span class="news-date">2026.09.04</span><span class="news-text">kmowxのホームページ「Kmowx's Park」運用開始</span></li>
+    </ul>
   </section>
 </main>
 
 <footer>© 2026 kmowx</footer>
+
 <script>
-// ---- ダークモード切り替え ----
-(function () {
-  var THEME_KEY = 'kmowx-theme';
-  var toggleBtn = document.getElementById('themeToggle');
-  var mql = window.matchMedia('(prefers-color-scheme: dark)');
-
-  function effectiveTheme() {
-    var forced = document.documentElement.getAttribute('data-theme');
-    if (forced === 'light' || forced === 'dark') return forced;
-    return mql.matches ? 'dark' : 'light';
-  }
-
-  function updateIcon() {
-    if (!toggleBtn) return;
-    var eff = effectiveTheme();
-    toggleBtn.textContent = eff === 'dark' ? '\u2600\ufe0f' : '\ud83c\udf19';
-    toggleBtn.setAttribute('aria-label', eff === 'dark' ? 'ライトモードに切り替え' : 'ダークモードに切り替え');
-  }
-
-  updateIcon();
-
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', function () {
-      var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
-      updateIcon();
-    });
-  }
-
-  mql.addEventListener('change', function () {
-    if (!document.documentElement.getAttribute('data-theme')) updateIcon();
-  });
-})();
-
-const navToggle = document.getElementById('navToggle');
-const navList = document.getElementById('navList');
-if (navToggle && navList) {
-  navToggle.addEventListener('click', () => {
-    const open = navList.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', open);
-  });
-  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    navList.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  }));
-}
-
+(function(){try{var t=localStorage.getItem('kmowx-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
 </script>
 </body>
 </html>
