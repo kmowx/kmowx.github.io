@@ -5,10 +5,10 @@
 (function(){try{var t=localStorage.getItem('kmowx-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
 </script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" type="image/png" href="images/profile.png">
-<link rel="apple-touch-icon" href="images/profile.png">
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+<link rel="apple-touch-icon" href="images/favicon.jpg">
 <meta name="description" content="kmowxのYouTube・niconico・X・pixivなど各種SNS・投稿サイトのリンク集。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Links | kmowxのホームページ">
@@ -56,6 +56,7 @@
   --surface: #1c1c23;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 html{scroll-behavior:smooth; background:var(--paper); transition: background-color .2s ease;}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
@@ -356,7 +357,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
     background:var(--paper); border-bottom:1px solid var(--line);
     max-height:0; overflow:hidden; transition: max-height .3s ease;
   }
-  nav ul.open{ max-height:280px; }
+  nav ul.open{ max-height: calc(100vh - 64px); overflow-y:auto; }
   nav li{ border-top:1px solid var(--line); }
   nav a{ display:block; padding:16px 24px; }
   .nav-toggle{ display:block; background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink); }

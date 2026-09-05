@@ -5,10 +5,10 @@
 (function(){try{var t=localStorage.getItem('kmowx-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
 </script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" type="image/png" href="images/profile.png">
-<link rel="apple-touch-icon" href="images/profile.png">
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+<link rel="apple-touch-icon" href="images/favicon.jpg">
 <meta name="description" content="kmowxの曲に合わせてターゲットを狙い撃つ、一人称視点のリズムアクションゲームを紹介。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="kmowxのリズムゲーム | kmowxのホームページ">
@@ -56,6 +56,7 @@
   --surface: #1c1c23;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 html{scroll-behavior:smooth; background:var(--paper); transition: background-color .2s ease;}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
@@ -338,10 +339,6 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
 @media (max-width:620px){
   .game-embed-frame{ aspect-ratio:960/2480; }
 }
-.itch-widget{
-  margin-top:20px; display:flex; justify-content:center;
-}
-.itch-widget iframe{ max-width:100%; }
 .embed-note{
   margin-top:16px; font-size:13px; opacity:0.65; text-align:center;
   max-width:560px; margin-left:auto; margin-right:auto;
@@ -376,7 +373,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
     background:var(--paper); border-bottom:1px solid var(--line);
     max-height:0; overflow:hidden; transition: max-height .3s ease;
   }
-  nav ul.open{ max-height:280px; }
+  nav ul.open{ max-height: calc(100vh - 64px); overflow-y:auto; }
   nav li{ border-top:1px solid var(--line); }
   nav a{ display:block; padding:16px 24px; }
   .nav-toggle{ display:block; background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink); }
@@ -429,10 +426,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
         </iframe>
       </div>
     </div>
-    <p class="embed-note">遊びづらい場合は以下の「Play on itch.io」をクリックし、進んだページで「Run Game」をクリックしてください。</p>
-    <div class="itch-widget">
-      <iframe frameborder="0" src="https://itch.io/embed/4953451?link_color=2ce8f4&amp;border_color=ffffff" width="552" height="167"><a href="https://kmowx.itch.io/kmowxs-rhythm-game-1">kmowx's Rhythm Game 1 by kmowx</a></iframe>
-    </div>
+    <p class="embed-note">遊びにくい場合はゲーム画面左下の「itch.io」ロゴを押して、進んだページで「Run Game」を押してください。</p>
     <div class="game-shots">
       <img src="images/game-1.jpg" alt="kmowxのリズムゲーム プレイ画面1" width="1000" height="483" loading="lazy">
       <img src="images/game-2.jpg" alt="kmowxのリズムゲーム プレイ画面2" width="1000" height="483" loading="lazy">

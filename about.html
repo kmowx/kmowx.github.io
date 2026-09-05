@@ -5,10 +5,10 @@
 (function(){try{var t=localStorage.getItem('kmowx-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
 </script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" type="image/png" href="images/profile.png">
-<link rel="apple-touch-icon" href="images/profile.png">
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+<link rel="apple-touch-icon" href="images/favicon.jpg">
 <meta name="description" content="kmowxのプロフィール。2022年後半から音楽・イラストの創作活動を開始し、歌声合成ソフトを使った楽曲とMVイラストを制作しています。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="About | kmowxのホームページ">
@@ -56,6 +56,7 @@
   --surface: #1c1c23;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 html{scroll-behavior:smooth; background:var(--paper); transition: background-color .2s ease;}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
@@ -229,6 +230,9 @@ nav a:hover::after{ width:100%; }
 .about-grid{
   display:grid; grid-template-columns: 240px 1fr; gap:48px; align-items:center;
 }
+.about-grid.detail{
+  grid-template-columns: 200px 1fr; align-items:flex-start;
+}
 .about-photo{
   width:100%; height:auto; display:block;
   border-radius:50%;
@@ -349,7 +353,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
     background:var(--paper); border-bottom:1px solid var(--line);
     max-height:0; overflow:hidden; transition: max-height .3s ease;
   }
-  nav ul.open{ max-height:280px; }
+  nav ul.open{ max-height: calc(100vh - 64px); overflow-y:auto; }
   nav li{ border-top:1px solid var(--line); }
   nav a{ display:block; padding:16px 24px; }
   .nav-toggle{ display:block; background:none; border:none; font-size:20px; cursor:pointer; color:var(--ink); }
@@ -359,6 +363,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
   section{ padding:72px 20px; }
   .contact-box{ padding:44px 24px; }
   .about-grid{ grid-template-columns: 1fr; }
+  .about-grid.detail{ grid-template-columns: 1fr; }
 }
 
 </style>
@@ -391,7 +396,7 @@ footer{ text-align:center; font-size:12px; opacity:0.4; padding:28px; font-famil
   </section>
 
   <section class="detail-content">
-    <div class="about-grid" style="align-items:flex-start; grid-template-columns:200px 1fr;">
+    <div class="about-grid detail">
       <img class="about-photo" src="images/profile.png" alt="kmowx プロフィールアイコン" width="309" height="309" loading="lazy">
       <p class="detail-lead" style="max-width:560px;">
         2022年後半、音楽・イラストなどの創作活動を開始。<br>
